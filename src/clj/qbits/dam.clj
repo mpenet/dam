@@ -6,8 +6,8 @@
   Written May 7-8, 2014 by Josiah Carlson
   Released under the MIT license.
 
-  TODO: preloading of script in redis instances + proper script
-  recovery in case of server reboot"
+  TODO: preloading of script in redis instances (evalsha) + proper
+  script recovery in case of server reboot"
   (:require
    [clojure.java.io :as io]
    [taoensso.carmine :as car]))

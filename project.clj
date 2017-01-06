@@ -1,4 +1,4 @@
-(defproject cc.qbits/dam "0.1.0-SNAPSHOT"
+(defproject cc.qbits/dam "0.1.0"
   :description "Redis/LUA backed rate limiter"
   :url "https://github.com/mpenet/dam"
   :license {:name "Eclipse Public License"
