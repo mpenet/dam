@@ -46,7 +46,9 @@
         key (str key ":" (long (/ now duration)))
         [cnt _] (car/wcar conn
                           (car/incr key)
-                          (car/expire key (inc (long (- seconds (mod now duration))))))]
+                          (car/expire key
+                                      (inc (long (- duration
+                                                    (mod now duration))))))]
     (> cnt limit)))
 
 (defn over-limit?
@@ -70,7 +72,7 @@
   (let [args (concat [@over-limit-lua (count base-keys)]
                      base-keys
                      [second minute hour day weight (now)])]
-    (= 1 (car/wcar conn-test (apply car/eval args)))))
+    (= 1 (car/wcar conn (apply car/eval args)))))
 
 (defn over-limit-sliding?
   "Will return whether the caller is over any of their limits. Uses a sliding
@@ -91,7 +93,7 @@
   (let [args (concat [@over-limit-sliding-lua (count base-keys)]
                      base-keys
                      [minute hour day weight (now)])]
-    (= 1 (car/wcar conn-test (apply car/eval args)))))
+    (= 1 (car/wcar conn (apply car/eval args)))))
 
 ;; (def conn-test
 ;;   {:pool {}
